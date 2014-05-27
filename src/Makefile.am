@@ -1,2 +1,2 @@
-SUBDIRS = helloworld
+SUBDIRS = helloworld pure_virtual
 
