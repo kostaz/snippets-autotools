@@ -5,5 +5,6 @@ AM_INIT_AUTOMAKE([foreign])
 AC_PROG_CC
 AC_PROG_CXX
 
-AC_OUTPUT(Makefile src/Makefile src/pure_virtual/Makefile src/helloworld/Makefile)
+AC_OUTPUT(Makefile src/Makefile src/pure_virtual/Makefile \
+	  src/helloworld/Makefile src/bitcoin_serialize/Makefile)
 
