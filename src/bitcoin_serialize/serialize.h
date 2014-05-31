@@ -3,37 +3,15 @@
 
 #include <assert.h>
 
-/******************************************************************************
- * Basic types
- ******************************************************************************/
-
 #define WRITEDATA(s, obj)	s.write((char*)&(obj), sizeof(obj))
 #define READDATA(s, obj)	s.read ((char*)&(obj), sizeof(obj))
+#define READWRITE(obj)							\
+	(								\
+		nSerSize += ::SerReadWrite(s, (obj), nType,		\
+					   nVersion, ser_action)	\
+	)
 
-/*******************************************************************************
- * unsigned int
- */
-inline unsigned int GetSerializeSize(unsigned int a, int, int = 0)
-{
-	return sizeof(a);
-}
-
-template<typename Stream>
-inline void Serialize(Stream& s, unsigned int a, int, int = 0)
-{
-	WRITEDATA(s, a);
-}
-
-template<typename Stream>
-inline void Unserialize(Stream& s, unsigned int& a, int, int = 0)
-{
-	READDATA(s, a);
-}
-
-/*******************************************************************************
- * Templates for serializing to anything that looks like a stream,
- * i.e. anything that supports .read(char*, int) and .write(char*, int).
- */
+#include "serialize_uint.h"
 
 class CSerActionGetSerializeSize { };
 class CSerActionSerialize        { };
@@ -76,10 +54,10 @@ struct ser_streamplaceholder
 		const bool fWrite = false;				\
 		const bool fRead = false;				\
 		unsigned int nSerSize = 0;				\
-		ser_streamplaceholder s;				\
+		ser_streamplaceholder s;                                \
 		assert(fGetSize || fWrite || fRead);			\
-		s.nType = nType;					\
-		s.nVersion = nVersion;					\
+		s.nType = nType;                                        \
+		s.nVersion = nVersion;                                  \
 		{statements}						\
 		return nSerSize;					\
 	}								\
@@ -105,12 +83,6 @@ struct ser_streamplaceholder
 		assert(fGetSize || fWrite || fRead);			\
 		{statements}						\
 	}
-
-#define READWRITE(obj)							\
-	(								\
-		nSerSize += ::SerReadWrite(s, (obj), nType,		\
-					   nVersion, ser_action)	\
-	)
 
 #endif // BITCOIN_SERIALIZE_H
 
