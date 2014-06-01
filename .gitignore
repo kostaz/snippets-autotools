@@ -1,0 +1,16 @@
+Makefile
+Makefile.in
+*.o
+cscope.out
+config.log
+config.status
+configure
+missing
+aclocal.m4
+autom4te.cache
+compile
+depcomp
+install-sh
+*.test
+.deps
+
