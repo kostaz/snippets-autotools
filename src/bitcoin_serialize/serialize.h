@@ -12,6 +12,7 @@
 	)
 
 #include "serialize_uint.h"
+#include "serialize_flat_data.h"
 
 class CSerActionGetSerializeSize { };
 class CSerActionSerialize        { };
@@ -54,10 +55,10 @@ struct ser_streamplaceholder
 		const bool fWrite = false;				\
 		const bool fRead = false;				\
 		unsigned int nSerSize = 0;				\
-		ser_streamplaceholder s;                                \
+		ser_streamplaceholder s;				\
 		assert(fGetSize || fWrite || fRead);			\
-		s.nType = nType;                                        \
-		s.nVersion = nVersion;                                  \
+		s.nType = nType;					\
+		s.nVersion = nVersion;					\
 		{statements}						\
 		return nSerSize;					\
 	}								\
