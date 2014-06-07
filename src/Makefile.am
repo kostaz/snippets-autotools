@@ -1,2 +1,2 @@
-SUBDIRS = helloworld pure_virtual bitcoin_serialize
+SUBDIRS = helloworld pure_virtual bitcoin_serialize boost
 
